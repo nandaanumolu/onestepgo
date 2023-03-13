@@ -1,17 +1,26 @@
-# %%
 import openai as ai
 from fastapi import FastAPI,Body
 import uvicorn
-from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+#from pydantic import BaseModel
 #from rest_framework.parsers import JSONParser
 app = FastAPI()
+
+
+origins=['https"//localhost:3000']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 ai.api_key="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"
 @app.get("/")
 def fun():
     return "Resume"
 #fv={'id':1,"name":"guru"}
-class User(BaseModel):
-    user: str
+
 @app.post("/resume")
 def generate_gpt3_response(fv):
     print(fv)

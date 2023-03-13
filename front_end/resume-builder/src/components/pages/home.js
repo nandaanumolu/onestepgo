@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export default function HomePage() {
     const [fv,setfv]=useState({"fname": "", "Exp": "", "fexp": "", "fed": ""})
@@ -17,20 +18,11 @@ export default function HomePage() {
     const submit=  ()=>{
         var obj = {"fname": "guru", "Exp": "4", "fexp": "data scientist", "fed": "CSE"}
         console.log(obj)
-        fetch('http://localhost:8080/resume', {
-            mode: 'no-cors',
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(obj)
-            })
-            .then(response => response.json())
-            .then(response =>{
-                console.log(response)
-            }
         
-            )   
+        axios.get("http://localhost:8000",{method:"no-cors"})
+        .then(res=>{
+            console.log(res)
+        })
             
         }     
     return (
